@@ -4,6 +4,7 @@
 //---------------FUNCTION
 void swap(int& a, int& b);
 void printArray(int* arr, int n);
+
 //---------------ALGORITHM SORTING
 void insertionSort(int arr[], int n, double& running_time, int& count_compare);
 void selectionSort(int arr[], int n, double& running_time, int& count_compare);

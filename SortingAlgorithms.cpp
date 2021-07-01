@@ -189,3 +189,7 @@ void QuickSort(int arr[], int n, double& time_use, int& count_compare)
     time_use = (double)(end - start) / CLOCKS_PER_SEC;
 }
 //-------------------------->Quick Sort
+
+//-------------------------->Merge Sort
+
+//-------------------------->Merge Sort

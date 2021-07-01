@@ -12,4 +12,8 @@ bool handleComparisonMode(int argc, char* argv[]);
 bool handleArguments(int argc, char* argv[]);
 bool Command_1(int argc, char* argv[], int algorithm);
 bool Command_2(int argc, char* argv[], int algorithm);
+bool Command_3(int argc, char* argv[], int algorithm);
+bool writeArray(string filename, int* arr, int n);
+//Same at write array with no cout
+bool writeGenarateArray(string filename, int* arr, int n);
 #endif 
