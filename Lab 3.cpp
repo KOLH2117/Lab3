@@ -239,7 +239,7 @@ bool Command_1(int argc,char* argv[],int algorithm){
     //Read input size
     string n="";
     getline(ifs,n);
-
+    int size = 0;
     //Check if it is the number
     if(!isNumber(n)){
         cout << "Not a number '" << n << "'" << endl;
@@ -247,12 +247,13 @@ bool Command_1(int argc,char* argv[],int algorithm){
     }
     else{
         //Check the input size
-        if(stoi(n) > MAX_SIZE){
+        size = stoi(n);
+        if(size > MAX_SIZE){
             cout << "Over the size limit: "<<n<<" > " << MAX_SIZE << endl;
             return false;
         }
         else{
-            if(stoi(n) < 0){
+            if(size < 0){
                 cout << "Invalid size: n > 0"<<endl;
                 return false;
             }
@@ -260,15 +261,16 @@ bool Command_1(int argc,char* argv[],int algorithm){
     }
     
     
-    int *arr = new int[stoi(n)];
-    int x=0;
+    int *arr = new int[size];
+    int arr_size = 0;
     string tmp;
 
     //Read the array from file to arr
     while(!ifs.eof()){
         getline(ifs, tmp,' ');
-        arr[x++] = stoi(tmp);
+        arr[arr_size++] = stoi(tmp);
     }
+    ifs.close();
 
     double running_time = 0;
     int count_compare = 0;
@@ -277,10 +279,10 @@ bool Command_1(int argc,char* argv[],int algorithm){
         case 0:
             break;
         case 1:
-            insertionSort(arr,x,running_time,count_compare);
+            insertionSort(arr,arr_size,running_time,count_compare);
             break;
         case 2:
-            bubbleSort(arr,x,running_time,count_compare);
+            bubbleSort(arr,arr_size,running_time,count_compare);
             break;
         case 3:
             break;
@@ -293,6 +295,19 @@ bool Command_1(int argc,char* argv[],int algorithm){
         case 7:
             break;
     }
+
+    ofstream ofs("output.txt");
+    if(!ofs){
+        cout << "Can't open file to write"<<endl;
+        return false;
+    }
+
+    ofs << n << endl;
+    for(int i = 0; i < arr_size - 1; i++){
+        ofs << arr[i] << " ";
+    }
+    ofs << arr[size - 1];
+    ofs.close();
 
     cout << "ALGORITHM MODE"<<endl;
     cout << "Algorithm: " << ALGORITHM_NAME[algorithm]<<endl;
@@ -312,10 +327,6 @@ bool Command_1(int argc,char* argv[],int algorithm){
             cout << "Comparisons: "<<count_compare << endl;
             break;  
     }  
-}
-
-bool Command_2(int argc, char *argv[],int algorithm){
-    
 }
 
 
@@ -350,8 +361,7 @@ bool handleAlgorithmsMode(int argc,char* argv[]){
                     }
                     else{
                         if(argc == 5){
-                            if(Command_2(argc, argv,algorithm) == false)
-                                return false;
+                            
                         }
                         else{
                             if(argc == 6){
@@ -397,24 +407,26 @@ bool handleArguments(int argc, char*argv[]){
     return true;    
 }
 
+
+
 int main(int argc, char *argv[]){
-    //if(handleArguments(argc,argv) == false)
-     //   return 0;
+    // if(handleArguments(argc,argv) == false)
+    //    return 0;
+    ofstream ofs("input.txt",ios::out);
+    if(!ofs){
+        cout << "Can't open file" ;
+        return 0;
+    }
 
     int n;
     cin >> n;
     int *arr = new int[n];
-    double running_time = 0;
-    int count_compare = 0;
+    ofs << n << endl;
+    GenerateData(arr,n,0);
+    for(int i = 0; i < n - 1; i++){
+        ofs << arr[i] << " ";
+    }
+    ofs << arr[n-1];
 
-    GenerateData(arr, n, 0);
-    printArray(arr, n);
-    
-    //insertionSort(arr,n,running_time,count_compare);
-    createHeap(arr,n,running_time,count_compare);
-    //bubbleSort(arr,n,running_time,count_compare);
-    //heapSort(arr,n,running_time,count_compare);
-    printArray(arr, n);
-    //cout << running_time << " " << count_compare <<endl;
     return 0;
 }
