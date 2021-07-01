@@ -1,9 +1,11 @@
-#include "DataGenerator.h"
-#include <iostream>
+ï»¿#include <iostream>
 #include <fstream>
 #include <cmath>
 #include <time.h>
 #include <stdlib.h>
+
+#include "DataGenerator.h"
+
 using namespace std;
 
 template <class T>
@@ -16,7 +18,7 @@ void HoanVi(T& a, T& b)
 
 //-------------------------------------------------
 
-// Hàm phát sinh mang du lieu ngau nhien
+// Hï¿½m phï¿½t sinh mang du lieu ngau nhien
 void GenerateRandomData(int a[], int n)
 {
 	srand((unsigned int)time(NULL));
@@ -27,7 +29,7 @@ void GenerateRandomData(int a[], int n)
 	}
 }
 
-// Hàm phát sinh mang du lieu co thu tu tang dan
+// Hï¿½m phï¿½t sinh mang du lieu co thu tu tang dan
 void GenerateSortedData(int a[], int n)
 {
 	for (int i = 0; i < n; i++)

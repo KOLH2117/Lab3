@@ -6,6 +6,7 @@
 #include <fstream>
 
 using namespace std;
+
 int N_ALGORITHM = 7;
 int N_OUTPUT_PARAM = 3;
 int N_DATA_ORDER = 4;
@@ -92,7 +93,7 @@ bool handleAlgorithmsMode(int argc, char* argv[]) {
             return false;
         }
         else {  //isNumber((string)argv[3]
-            if (stoi((string)argv[3])) {
+            if (isNumber((string)argv[3])) {
                 if (stoi((string)argv[3]) > MAX_SIZE || stoi((string)argv[3]) < 0) {
                     cout << "Invalid input size" << endl;
                     cout << "Accepting input size n < " << MAX_SIZE << endl;
@@ -120,10 +121,8 @@ bool handleAlgorithmsMode(int argc, char* argv[]) {
                 }
             }
             else {
-                /*
                 if(Command_1(argc,argv,algorithm) == false)
                     return false;
-                */
             }
         }
     }
@@ -264,84 +263,78 @@ bool Command_2(int argc, char* argv[], int algorithm) {
     }
 
     int inputSize = stoi((string)argv[3]);
-    //Da co dieu kien kiem tra o ham handleAlgorithmsMode
-    
-    //if (inputSize < 0 || inputSize > MAX_SIZE) {
-       // return false;
-    //}
-    //else {
-        int* arr = new int[inputSize];
-        int x = inputSize;
-        double running_time = 0;
-        int count_compare = 0;
 
-        switch (input_order) {
-            case 0: {
-                //rand: randomized data
-                GenerateData(arr, inputSize, 0);
-            } break;
-            case 1: {
-                //nsorted: nearly sorted data
-                GenerateData(arr, inputSize, 3);
-            } break;
-            case 2: {
-                GenerateData(arr, inputSize, 1);
-                //sorted: sorted data
-            } break;
-            case 3: {
-                GenerateData(arr, inputSize, 2);
-                //rev: reverse sorted data
-            }
-        }
+    int* arr = new int[inputSize];
+    int x = inputSize;
+    double running_time = 0;
+    int count_compare = 0;
 
-        switch (algorithm) {
-        case 0:
-            //Selection Sort
-            selectionSort(arr, x, running_time, count_compare);
+    switch (input_order) {
+        case 0: 
+            //rand: randomized data
+            GenerateData(arr, inputSize, 0);
             break;
-        case 1:
-            //Insertion Sort
-            insertionSort(arr, x, running_time, count_compare);
+        case 1: 
+            //nsorted: nearly sorted data
+            GenerateData(arr, inputSize, 3);
             break;
-        case 2:
-            //Bubble Sort
-            bubbleSort(arr, x, running_time, count_compare);
+        case 2: 
+            //sorted: sorted data
+            GenerateData(arr, inputSize, 1);
             break;
-        case 3:
-            //Heap Sort
-            break;
-        case 4:
-            //Merge Sort
-            break;
-        case 5:
-            //QuickSort
-            break;
-        case 6:
-            //Radix Sort
-            break;
-        case 7:
-            break;
-        }
-
-        cout << "ALGORITHM MODE" << endl;
-        cout << "Algorithm: " << ALGORITHM_NAME[algorithm] << endl;
-        cout << "Input size: " << inputSize << endl;
-        cout << "Input order: " << DATA_ORDER[input_order] << endl;
-        cout << "----------------------------------------------------------------" << endl;
-
-        switch (output_param) {
-        case 0:
-            cout << "Running time: " << running_time << endl;
-            break;
-        case 1:
-            cout << "Comparisons: " << count_compare << endl;
-            break;
-        case 2:
-            cout << "Running time: " << running_time << endl;
-            cout << "Comparisons: " << count_compare << endl;
-            break;
-        }
+        case 3: 
+            //rev: reverse sorted data
+            GenerateData(arr, inputSize, 2);
     }
+
+    switch (algorithm) {
+    case 0:
+        //Selection Sort
+        selectionSort(arr, x, running_time, count_compare);
+        break;
+    case 1:
+        //Insertion Sort
+        insertionSort(arr, x, running_time, count_compare);
+        break;
+    case 2:
+        //Bubble Sort
+        bubbleSort(arr, x, running_time, count_compare);
+        break;
+    case 3:
+        //Heap Sort
+        break;
+    case 4:
+        //Merge Sort
+        break;
+    case 5:
+        //QuickSort
+        break;
+    case 6:
+        //Radix Sort
+        break;
+    case 7:
+        break;
+    }
+
+    cout << "ALGORITHM MODE" << endl;
+    cout << "Algorithm: " << ALGORITHM_NAME[algorithm] << endl;
+    cout << "Input size: " << inputSize << endl;
+    cout << "Input order: " << DATA_ORDER[input_order] << endl;
+    cout << "----------------------------------------------------------------" << endl;
+
+    switch (output_param) {
+    case 0:
+        cout << "Running time: " << running_time << endl;
+        break;
+    case 1:
+        cout << "Comparisons: " << count_compare << endl;
+        break;
+    case 2:
+        cout << "Running time: " << running_time << endl;
+        cout << "Comparisons: " << count_compare << endl;
+        break;
+    }
+}
    
 //}
 //---------------COMPARISON MODE
