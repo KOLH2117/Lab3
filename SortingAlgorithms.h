@@ -18,6 +18,6 @@ void heapSort(int arr[], int n, double& running_time, int& count_compare);
 //-------------------------->Quick Sort
 int partition(int arr[], int low, int high, int& count_compare);
 void Sort(int arr[], int low, int high, int& count_compare);
-void QuickSort(int arr[], int n, double& time_use, int& count_compare);
+void quickSort(int arr[], int n, double& time_use, int& count_compare);
 //-------------------------->Quick Sort
 #endif

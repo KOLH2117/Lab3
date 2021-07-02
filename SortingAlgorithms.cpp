@@ -79,6 +79,15 @@ void bubbleSort(int arr[], int n, double& running_time, int& count_compare) {
 }
 //-------------------------->Bubble Sort
 
+//-------------------------->Shaker Sort
+
+//-------------------------->Shaker Sort
+
+//-------------------------->Shell Sort
+
+//-------------------------->Shell Sort
+
+
 //-------------------------->Heap Sort
 void sift(int arr[], int left, int right, double& running_time, int& count_compare) {
     int i = left;
@@ -131,6 +140,9 @@ void heapSort(int arr[], int n, double& running_time, int& count_compare) {
     running_time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 //-------------------------->Heap Sort
+//-------------------------->Merge Sort
+
+//-------------------------->Merge Sort
 
 //-------------------------->Quick Sort
 int partition(int arr[], int low, int high, int& count_compare)
@@ -173,7 +185,7 @@ void Sort(int arr[], int low, int high, int& count_compare)
     }
 }
 
-void QuickSort(int arr[], int n, double& time_use, int& count_compare)
+void quickSort(int arr[], int n, double& time_use, int& count_compare)
 {
     count_compare = 0;
     time_use = 0;
@@ -189,3 +201,17 @@ void QuickSort(int arr[], int n, double& time_use, int& count_compare)
     time_use = (double)(end - start) / CLOCKS_PER_SEC;
 }
 //-------------------------->Quick Sort
+
+//-------------------------->Counting Sort
+
+//-------------------------->Counting Sort
+
+//-------------------------->Radix Sort
+
+//-------------------------->Radix Sort
+
+//-------------------------->Flash Sort
+
+//-------------------------->Flash Sort
+
+
