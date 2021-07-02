@@ -1,19 +1,20 @@
-﻿#include "Terminal.h"
+﻿#include <iostream>
+#include <fstream>
+
+#include "Terminal.h"
 #include "DataGenerator.h"
 #include "SortingAlgorithms.h"
-#include <string>
-#include <iostream>
-#include <fstream>
 
 using namespace std;
 
+int MAX_SIZE = 1000000;
 int N_ALGORITHM = 11;
 int N_OUTPUT_PARAM = 3;
 int N_DATA_ORDER = 4;
 string ALGORITHM_NAME[11] = { "selection-sort", "insertion-sort", "bubble-sort","shaker-sort", "shell-sort", "heap-sort", "merge-sort", "quick-sort","counting-sort","radix-sort","flash-sort" };
 string OUTPUT_PARAM[3] = { "-time","-comp","-both" };
-string DATA_ORDER[4] = { "-rand","-nsorted","-sorted","-rev" };
-int MAX_SIZE = 1000000;
+string DATA_ORDER[4] = { "-rand","-nsorted","-sorted","-rev"};
+
 
 
 //Kiểm tra chuỗi (string) có phải là một số không ? Kiểu trả về bool
@@ -27,34 +28,34 @@ bool isNumber(string s) {
 
 //Tham chiếu đối số thứ 2 (int&) với chuỗi ALGORITHM_NAME[7]
 bool isValidAlgorithm(string algorithm, int& valid_algorithm) {
-    int Index = 0;
-    while (Index < N_ALGORITHM) {
-        if (ALGORITHM_NAME[Index] == algorithm)
+    int index = 0;
+    while (index < N_ALGORITHM) {
+        if (ALGORITHM_NAME[index] == algorithm)
             break;
-        Index++;
+        index++;
     }
 
-    if (Index == N_ALGORITHM)
+    if (index == N_ALGORITHM)
         return false;
 
-    valid_algorithm = Index;
+    valid_algorithm = index;
     return true;
 }
 
 //Check Valid  parameters: "-time", "-comp", "-sort"
 bool isValidOutputParam(string output_param, int& valid_output) {
-    int Index = 0;
-    while (Index < N_OUTPUT_PARAM) {
-        if (OUTPUT_PARAM[Index] == output_param)
+    int index = 0;
+    while (index < N_OUTPUT_PARAM) {
+        if (OUTPUT_PARAM[index] == output_param)
             break;
-        Index++;
+        index++;
     }
 
-    if (Index >= N_OUTPUT_PARAM) {
+    if (index >= N_OUTPUT_PARAM) {
         return false;
     }
 
-    valid_output = Index;
+    valid_output = index;
     return true;
 }
 
@@ -131,7 +132,7 @@ bool readFile(string filename,int* &arr,int &input_size){
 }
 
 bool writeFile(string filename,int *arr,int n){
-    ofstream ofs(filename,ios::out);
+    ofstream ofs(filename);
     if(!ofs){
         cout << "Can't open '" << filename <<"'.\n";
         return false;
@@ -234,6 +235,7 @@ bool Command_1(int argc, char* argv[], int algorithm) {
 
     if(arr != NULL)
         delete [] arr;
+    return true;
 }
 
 bool Command_2(int argc, char* argv[], int algorithm) {
@@ -267,22 +269,21 @@ bool Command_2(int argc, char* argv[], int algorithm) {
     int count_compare = 0;
 
     switch (input_order) {
-        case 0: {
+        case 0: 
             //rand: randomized data
             GenerateData(arr, input_size, 0);
-        } break;
-        case 1: {
+            break;
+        case 1: 
             //nsorted: nearly sorted data
             GenerateData(arr, input_size, 3);
-        } break;
-        case 2: {
+            break;
+        case 2: 
             GenerateData(arr, input_size, 1);
             //sorted: sorted data
-        } break;
-        case 3: {
+            break;
+        case 3: 
             GenerateData(arr, input_size, 2);
             //rev: reverse sorted data
-        }
     }
     
     //Write generated data to input.txt
@@ -331,7 +332,7 @@ bool Command_2(int argc, char* argv[], int algorithm) {
             //Flash Sort
             break;
     }
-
+    
     cout << "ALGORITHM MODE" << endl;
     cout << "Algorithm: " << ALGORITHM_NAME[algorithm] << endl;
     cout << "Input size: " << input_size << endl;
@@ -376,7 +377,7 @@ bool Command_3(int argc, char* argv[], int algorithm) {
     
     //Check valid input size 
     int inputSize = stoi((string)argv[3]);
-    int* arr = new int[inputSize];
+    int* arr = new int[inputSize];  
 
     double running_time = 0;
     int count_compare = 0;
@@ -386,27 +387,26 @@ bool Command_3(int argc, char* argv[], int algorithm) {
     cout << "Input size: " << inputSize <<"\n\n";
     
     for (int i = 0; i < 4; i++) {
+        
         running_time = 0;
         count_compare = 0;
 
-        
         switch (i) {
-            case 0: {
+            case 0: 
                 //rand: randomized data
                 GenerateData(arr, inputSize, 0);
-            } break;
-            case 1: {
+                break;
+            case 1: 
                 //nsorted: nearly sorted data
                 GenerateData(arr, inputSize, 3);
-            } break;
-            case 2: {
+                break;
+            case 2: 
                 GenerateData(arr, inputSize, 1);
                 //sorted: sorted data
-            } break;
-            case 3: {
+                break;
+            case 3: 
                 GenerateData(arr, inputSize, 2);
-                //rev: reverse sorted data
-            }
+                //rev: reverse sorted data  
         }
 
         string suffix = ".txt";
@@ -416,7 +416,6 @@ bool Command_3(int argc, char* argv[], int algorithm) {
         if(writeFile(filename, arr, inputSize) == false){
             return false;
         }
-
         switch (algorithm) {
             case 0:
                 //Selection Sort
@@ -457,8 +456,7 @@ bool Command_3(int argc, char* argv[], int algorithm) {
             case 10:
                 //Flash Sort
                 break;
-        }
-        
+        } 
         cout << "Input order: " << DATA_ORDER[i] << endl;
         cout << "----------------------------------------------------------------\n";
 
@@ -475,6 +473,7 @@ bool Command_3(int argc, char* argv[], int algorithm) {
             break;
         }
         cout << endl;
+        
     }
     
     delete[]arr;

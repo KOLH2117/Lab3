@@ -150,18 +150,16 @@ int partition(int arr[], int low, int high, int& count_compare)
     int pivot = arr[high];
     int left = low;
     int right = high - 1;
+
     while (true)
     {
-        while ((++count_compare && left <= right) && (++count_compare && arr[left] < pivot))
-        {
+        while (((++count_compare) &&left <= right )&& (++count_compare && arr[left] < pivot)){
             left++;
         }
 
-        while ((++count_compare && right >= left) && (++count_compare && arr[right] > pivot))
-        {
+        while (((++count_compare) && right >= left )&& (++count_compare && arr[right] > pivot)){
             right--;
         }
-
 
         if (++count_compare && left >= right)
             break;
@@ -170,6 +168,7 @@ int partition(int arr[], int low, int high, int& count_compare)
         left++;
         right--;
     }
+
     swap(arr[left], arr[high]);
     return left;
 }

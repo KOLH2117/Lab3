@@ -9,6 +9,9 @@
         "sstream": "cpp",
         "ostream": "cpp",
         "cmath": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "cstdlib": "cpp",
+        "system_error": "cpp",
+        "string": "cpp"
     }
 }
