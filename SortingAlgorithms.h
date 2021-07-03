@@ -1,6 +1,6 @@
-#pragma once
-#ifndef _SORTING_ALGORITHMS_H_
-#define _SORTING_ALGORITHMS_H_
+
+#ifndef _SORTING_ALGORITHMS_H
+#define _SORTING_ALGORITHMS_H
 //---------------FUNCTION
 void swap(int& a, int& b);
 void printArray(int* arr, int n);
