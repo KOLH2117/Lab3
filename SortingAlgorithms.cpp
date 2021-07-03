@@ -1,10 +1,12 @@
-#include "SortingAlgorithms.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
 #include <time.h> 
 #include <string>
 #include <stdlib.h>
+
+#include "SortingAlgorithms.h"
+
 using namespace std;
 
 void swap(int& a, int& b) {
@@ -21,7 +23,7 @@ void printArray(int* arr, int n) {
 }
 
 //-------------------------->Insertion Sort
-void insertionSort(int arr[], int n, double& running_time, int& count_compare) {
+void insertionSort(int arr[], int n, double& running_time, unsigned int& count_compare) {
     clock_t start, end;
     start = clock();
 
@@ -45,7 +47,7 @@ void insertionSort(int arr[], int n, double& running_time, int& count_compare) {
 //-------------------------->Insertion Sort
 
 //-------------------------->Slection Sort
-void selectionSort(int arr[], int n, double& running_time, int& count_compare) {
+void selectionSort(int arr[], int n, double& running_time, unsigned int& count_compare) {
     clock_t start, end;
     start = clock();
     for (int i = 0; (++count_compare) && i <= n - 2; i++) {
@@ -63,7 +65,7 @@ void selectionSort(int arr[], int n, double& running_time, int& count_compare) {
 //-------------------------->Slection Sort
 
 //-------------------------->Bubble Sort
-void bubbleSort(int arr[], int n, double& running_time, int& count_compare) {
+void bubbleSort(int arr[], int n, double& running_time, unsigned int& count_compare) {
     clock_t start, end;
     start = clock();
 
@@ -89,7 +91,7 @@ void bubbleSort(int arr[], int n, double& running_time, int& count_compare) {
 
 
 //-------------------------->Heap Sort
-void sift(int arr[], int left, int right, double& running_time, int& count_compare) {
+void sift(int arr[], int left, int right, double& running_time, unsigned int& count_compare) {
     int i = left;
     int j = 2 * i;
     int x = arr[i];
@@ -108,7 +110,7 @@ void sift(int arr[], int left, int right, double& running_time, int& count_compa
     arr[i] = x;
 }
 
-void createHeap(int arr[], int n, double& running_time, int& count_compare) {
+void createHeap(int arr[], int n, double& running_time, unsigned int& count_compare) {
     //Make the array into a heap
 
     int left = (n - 1) / 2;
@@ -118,7 +120,7 @@ void createHeap(int arr[], int n, double& running_time, int& count_compare) {
     }
 }
 
-void heapSort(int arr[], int n, double& running_time, int& count_compare) {
+void heapSort(int arr[], int n, double& running_time, unsigned int& count_compare) {
     clock_t start, end;
     start = clock();
 
@@ -145,35 +147,84 @@ void heapSort(int arr[], int n, double& running_time, int& count_compare) {
 //-------------------------->Merge Sort
 
 //-------------------------->Quick Sort
-int partition(int arr[], int low, int high, int& count_compare)
+// int partition(int arr[], int low, int high, int& count_compare)
+// {
+//     int pivot = arr[high];
+//     int left = low;
+//     int right = high - 1;
+
+//     while (true)
+//     {
+//         while (((++count_compare) &&left <= right )&& (++count_compare && arr[left] < pivot)){
+//             left++;
+//         }
+
+//         while (((++count_compare) && right >= left )&& (++count_compare && arr[right] > pivot)){
+//             right--;
+//         }
+
+//         if (++count_compare && left >= right)
+//             break;
+
+//         swap(arr[left], arr[right]);
+//         left++;
+//         right--;
+//     }
+
+//     swap(arr[left], arr[high]);
+//     return left;
+// }
+
+int partition(int arr[], int low, int high, unsigned int& count_compare)
 {
-    int pivot = arr[high];
-    int left = low;
-    int right = high - 1;
+    // int pivot = arr[high];
+    // int left = low;
+    // int right = high - 1;
 
-    while (true)
-    {
-        while (((++count_compare) &&left <= right )&& (++count_compare && arr[left] < pivot)){
-            left++;
-        }
+    // while (left<= right)
+    // {
+    //     while ((++count_compare && arr[left] < pivot)){
+    //         left++;
+    //     }
 
-        while (((++count_compare) && right >= left )&& (++count_compare && arr[right] > pivot)){
-            right--;
-        }
+    //     while ((++count_compare && arr[right] > pivot)){
+    //         right--;
+    //     }
 
-        if (++count_compare && left >= right)
-            break;
+    //     if (++count_compare &&left <= right){
+    //         swap(arr[left], arr[right]);
+    //         left++;
+    //         right--;
+    //     }
+    // }
 
-        swap(arr[left], arr[right]);
-        left++;
-        right--;
-    }
+    // swap(arr[left], arr[high]);
+    // return left;
 
-    swap(arr[left], arr[high]);
-    return left;
+    int pivot = arr[(low + high) / 2];
+	int i = low;
+	int j = high;
+	int tmp;
+	while (++count_compare &&i <= j)
+	{
+		while (++count_compare && arr[i] < pivot)
+			i++;
+		while (++count_compare && arr[j] > pivot)
+			j--;
+		if (++count_compare && i <= j) {
+			tmp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = tmp;
+			i++;
+			j--;
+		}
+	}
+	return i;
+
+    
 }
 
-void Sort(int arr[], int low, int high, int& count_compare)
+void Sort(int arr[], int low, int high, unsigned int& count_compare)
 {
     if (++count_compare && low < high)
     {
@@ -184,7 +235,7 @@ void Sort(int arr[], int low, int high, int& count_compare)
     }
 }
 
-void quickSort(int arr[], int n, double& time_use, int& count_compare)
+void quickSort(int arr[], int n, double& time_use,unsigned int& count_compare)
 {
     count_compare = 0;
     time_use = 0;
@@ -210,7 +261,83 @@ void quickSort(int arr[], int n, double& time_use, int& count_compare)
 //-------------------------->Radix Sort
 
 //-------------------------->Flash Sort
+void flashSort(int arr[],int n,double& running_time, unsigned int& count_compare){
+    int m = int(0.45*n);
 
+    //Find min value and max index
+    int minVal = 0;
+    int maxVal = 0;
+    int i = 0;
+    if(n % 2 == 0){
+        if(arr[0] < arr[1]){
+            minVal = arr[0];
+            maxVal = arr[1];
+        }
+        else{
+            minVal = arr[1];
+            maxVal = arr[0];
+        }
+        i = 2;
+    }
+    else{
+        minVal = arr[0];
+        maxVal = arr[0];
+        i = 1;
+    }
+    while(i < n - 1){
+        if(arr[i] < arr[i+1]){
+           if(arr[i] < minVal){
+               minVal = arr[i];
+           }
+           if(arr[i+1] > maxVal){
+               maxVal = arr[i+1];
+           }
+        }
+        else{
+            if(arr[i] > maxVal){
+                maxVal = arr[i];
+            }
+            if(arr[i+1] < minVal){
+                minVal = arr[i+1];
+            }
+        }
+        i+=2;
+    }
+
+    int *L = new int [m];
+    for(int i = 0; i < m ; i++){
+        L[i] = 0;
+    }
+
+    double tmp = (m - 1)*1.0/(maxVal - minVal);
+
+    for(int i = 0; i < n; i++){
+        int k = tmp * (arr[i] - minVal) ;
+        L[k]++;
+    }
+
+    for(int i = 1; i < m; i++){
+        L[i] = L[i - 1] + L[i]; 
+    }
+
+    int flash = 0;
+    int move = 0;
+    int j = 0;
+    while(move < n - 1){
+        flash = arr[0];
+        int k = tmp * (flash - minVal) ;
+        j = L[k] - 1;
+        L[k]--;
+        swap(arr[0],arr[j]);
+        move++;
+    }
+
+    delete[] L;
+    insertionSort(arr,n,running_time, count_compare);
+    for(int i = 0;i < n;i++){
+        cout <<arr[i] << endl;
+    }
+}
 //-------------------------->Flash Sort
 
 
