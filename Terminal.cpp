@@ -281,7 +281,7 @@ void OutputConsoleForAlgorithmsMODE(int cmd,char* argv[],int output_param,double
             cout << "Running time: " << running_time << endl;
             break;
         case 1:
-            cout << "Comparisons: " << count_compare << endl;
+            cout << "Comparisions: " << count_compare << endl;
             break;
         case 2:
             cout << "Running time: " << running_time << endl;
