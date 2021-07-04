@@ -86,7 +86,29 @@ void bubbleSort(int arr[], int n, double& running_time, unsigned int& count_comp
 //-------------------------->Shaker Sort
 
 //-------------------------->Shell Sort
+void shellSort(int* arr, int n, double &running_time,unsigned int &count_compare)
+{
+    running_time = 0;
+    count_compare = 0;
+    clock_t start, end;
 
+    start = clock();
+    for (int gap = n / 2;++count_compare && gap > 0; gap /= 2)
+    {
+       
+        for (int i = gap;++count_compare && i < n; i++)
+        {
+            int temp = arr[i];
+            int j;
+            for (j = i; (++count_compare && j >= gap) && (++count_compare && arr[j - gap] > temp); j -= gap)
+                arr[j] = arr[j - gap];
+            arr[j] = temp;
+        }
+    }
+
+    end = clock();
+    running_time = (double)(end - start) / CLOCKS_PER_SEC;
+}
 //-------------------------->Shell Sort
 
 
@@ -177,30 +199,6 @@ void heapSort(int arr[], int n, double& running_time, unsigned int& count_compar
 
 int partition(int arr[], int low, int high, unsigned int& count_compare)
 {
-    // int pivot = arr[high];
-    // int left = low;
-    // int right = high - 1;
-
-    // while (left<= right)
-    // {
-    //     while ((++count_compare && arr[left] < pivot)){
-    //         left++;
-    //     }
-
-    //     while ((++count_compare && arr[right] > pivot)){
-    //         right--;
-    //     }
-
-    //     if (++count_compare &&left <= right){
-    //         swap(arr[left], arr[right]);
-    //         left++;
-    //         right--;
-    //     }
-    // }
-
-    // swap(arr[left], arr[high]);
-    // return left;
-
     int pivot = arr[(low + high) / 2];
 	int i = low;
 	int j = high;
@@ -220,8 +218,6 @@ int partition(int arr[], int low, int high, unsigned int& count_compare)
 		}
 	}
 	return i;
-
-    
 }
 
 void Sort(int arr[], int low, int high, unsigned int& count_compare)
@@ -294,7 +290,53 @@ void countingSort(int a[], int n, double& time_use,unsigned int& count_compare)
 //-------------------------->Counting Sort
 
 //-------------------------->Radix Sort
+void radixSort(int a[], int n, double& running_time,unsigned int& count_compare)
+{
+    running_time = 0;
+    count_compare = 0;
 
+    clock_t start, end;
+    start = clock();
+    //Find maximum value in a[]
+    int maxValue = a[0];
+    for (int i = 1; ++count_compare && i < n; i++)
+    {
+        if (a[i] > maxValue)
+            maxValue = a[i];
+    }
+    // Do counting sort for every digit. Note that instead
+    // of passing digit number, j is passed. j is 10^i
+    // where i is current digit number
+    for (int j = 1; ++count_compare && maxValue / j > 0; j *= 10)
+    {
+        //Created Aftersorted to cout;
+        int* Aftersorted = new int[n];
+        int k = 0;
+        int count[10] = { 0 };
+        // Store count of occurrences in count[]
+        for (int k = 0; ++count_compare && k < n; k++)
+        {
+            count[(a[k] / j) % 10]++;
+        }
+        // Change count[k] so that count[k] now contains actual
+        //  position of this digit in output[]
+        for (k = 1; ++count_compare && k < 10; k++)
+        {
+            count[k] += count[k - 1];
+        }
+        // Build the Aftersorted array
+        for (k = n - 1; ++count_compare && k >= 0; k--) {
+            Aftersorted[count[(a[k] / j) % 10] - 1] = a[k];
+            count[(a[k] / j) % 10]--;
+        }
+        // Copy the output array to a[], so that a[] now
+        // contains sorted numbers according to current digit
+        for (k = 0; k < n; k++)
+            a[k] = Aftersorted[k];
+    }
+    end = clock();
+    running_time = (double)(end - start) / CLOCKS_PER_SEC;
+}
 //-------------------------->Radix Sort
 
 //-------------------------->Flash Sort

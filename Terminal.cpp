@@ -222,6 +222,7 @@ void AlgorithmsMODE(int* arr, int inputSIZE, double& running_time,unsigned int& 
             break;
         case 4:
             //Shell Sort
+            shellSort(arr, inputSIZE, running_time,count_compare);
             break;
         case 5:
             //Heap Sort
@@ -236,9 +237,11 @@ void AlgorithmsMODE(int* arr, int inputSIZE, double& running_time,unsigned int& 
             break;
         case 8:
             //Couting Sort
+            countingSort(arr, inputSIZE, running_time, count_compare);
             break;
         case 9:
             //Radix Sort
+            radixSort(arr, inputSIZE, running_time, count_compare);
             break;
         case 10:
             //Flash Sort
