@@ -20,7 +20,9 @@ int partition(int arr[], int low, int high, unsigned int& count_compare);
 void Sort(int arr[], int low, int high, unsigned int& count_compare);
 void quickSort(int arr[], int n, double& time_use, unsigned int& count_compare);
 //-------------------------->Quick Sort
-
+//-------------------------->Counting Sort
+void countingSort(int a[], int n, double& time_use,unsigned int& count_compare);
+//-------------------------->Counting Sort
 //-------------------------->Flash Sort
 void flashSort(int arr[], int n, double& running_time, unsigned int& count_compare);
 //-------------------------->Flash Sort

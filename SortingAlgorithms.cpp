@@ -253,7 +253,44 @@ void quickSort(int arr[], int n, double& time_use,unsigned int& count_compare)
 //-------------------------->Quick Sort
 
 //-------------------------->Counting Sort
+void countingSort(int a[], int n, double& time_use,unsigned int& count_compare)
+{
+    clock_t start, end;
+    start = clock();
+    int a_fake[100];
+    int max = a[0];
+    int min = a[0];
+    int i;
+    for (i = 1; ++count_compare && i < n; i++)
+    {
+        if (++count_compare && a[i] > max)
+            max = a[i];
+        else if (++count_compare && a[i] < min)
+            min = a[i];
+    }
 
+    int count_array[10];
+    for (i = 0; i < 10; i++)
+        count_array[i] = 0;
+
+    for (i = 0; i < n; i++)
+        count_array[a[i] - min]++;
+
+    for (i = 1; ++count_compare && i < 10; i++)
+        count_array[i] += count_array[i - 1];
+
+    for (i = 0;++count_compare && i < n; i++)
+    {
+        a_fake[count_array[a[i] - min] - 1] = a[i];
+        count_array[a[i] - min]--;
+    }
+
+    for (i = 0; ++count_compare && i < n; i++)
+        a[i] = a_fake[i];
+
+    end = clock();
+    time_use = (double)(end - start) / CLOCKS_PER_SEC;
+}
 //-------------------------->Counting Sort
 
 //-------------------------->Radix Sort
