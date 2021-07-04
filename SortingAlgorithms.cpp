@@ -88,14 +88,11 @@ void bubbleSort(int arr[], int n, double& running_time, unsigned int& count_comp
 //-------------------------->Shell Sort
 void shellSort(int* arr, int n, double &running_time,unsigned int &count_compare)
 {
-    running_time = 0;
-    count_compare = 0;
     clock_t start, end;
 
     start = clock();
     for (int gap = n / 2;++count_compare && gap > 0; gap /= 2)
     {
-       
         for (int i = gap;++count_compare && i < n; i++)
         {
             int temp = arr[i];
@@ -231,20 +228,16 @@ void Sort(int arr[], int low, int high, unsigned int& count_compare)
     }
 }
 
-void quickSort(int arr[], int n, double& time_use,unsigned int& count_compare)
+void quickSort(int arr[], int n, double& running_time,unsigned int& count_compare)
 {
-    count_compare = 0;
-    time_use = 0;
-
     clock_t start, end;
-
     start = clock();
 
     Sort(arr, 0, n - 1, count_compare);
 
     end = clock();
 
-    time_use = (double)(end - start) / CLOCKS_PER_SEC;
+    running_time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 //-------------------------->Quick Sort
 
@@ -292,9 +285,6 @@ void countingSort(int a[], int n, double& time_use,unsigned int& count_compare)
 //-------------------------->Radix Sort
 void radixSort(int a[], int n, double& running_time,unsigned int& count_compare)
 {
-    running_time = 0;
-    count_compare = 0;
-
     clock_t start, end;
     start = clock();
     //Find maximum value in a[]
@@ -343,12 +333,12 @@ void radixSort(int a[], int n, double& running_time,unsigned int& count_compare)
 void flashSort(int arr[],int n,double& running_time, unsigned int& count_compare){
     int m = int(0.45*n);
 
-    //Find min value and max index
+    //------->Find min value and max index
     int minVal = 0;
     int maxVal = 0;
     int i = 0;
-    if(n % 2 == 0){
-        if(arr[0] < arr[1]){
+    if(++count_compare && n % 2 == 0){
+        if(++count_compare && arr[0] < arr[1]){
             minVal = arr[0];
             maxVal = arr[1];
         }
@@ -363,59 +353,69 @@ void flashSort(int arr[],int n,double& running_time, unsigned int& count_compare
         maxVal = arr[0];
         i = 1;
     }
-    while(i < n - 1){
-        if(arr[i] < arr[i+1]){
-           if(arr[i] < minVal){
+    while(++count_compare && i < n - 1){
+        if(++count_compare && arr[i] < arr[i+1]){
+           if(++count_compare && arr[i] < minVal){
                minVal = arr[i];
            }
-           if(arr[i+1] > maxVal){
+           if(++count_compare && arr[i+1] > maxVal){
                maxVal = arr[i+1];
            }
         }
         else{
-            if(arr[i] > maxVal){
+            if(++count_compare && arr[i] > maxVal){
                 maxVal = arr[i];
             }
-            if(arr[i+1] < minVal){
+            if(++count_compare && arr[i+1] < minVal){
                 minVal = arr[i+1];
             }
         }
         i+=2;
     }
+    //------->Find min value and max index
 
     int *L = new int [m];
-    for(int i = 0; i < m ; i++){
+    for(int i = 0;++count_compare &&  i < m ; i++){
         L[i] = 0;
     }
 
     double tmp = (m - 1)*1.0/(maxVal - minVal);
 
-    for(int i = 0; i < n; i++){
+    for(int i = 0; ++count_compare && i < n; i++){
         int k = tmp * (arr[i] - minVal) ;
         L[k]++;
     }
 
-    for(int i = 1; i < m; i++){
+    for(int i = 1;++count_compare && i < m; i++){
         L[i] = L[i - 1] + L[i]; 
     }
 
-    int flash = 0;
-    int move = 0;
-    int j = 0;
-    while(move < n - 1){
-        flash = arr[0];
-        int k = tmp * (flash - minVal) ;
-        j = L[k] - 1;
-        L[k]--;
-        swap(arr[0],arr[j]);
-        move++;
-    }
+    int nmove = 0;
+	int j = 0;
+	int k = m - 1;
+	int t = 0;
+	int flash;
+	while (++count_compare && nmove < n - 1)
+	{
+		while (++count_compare && j > L[k] - 1)
+		{
+			j++;
+			k = int(tmp*(arr[j] - minVal));
+		}
+		flash = arr[j];
+		if (++count_compare && k < 0) break;
+		while (++count_compare && j != L[k])
+		{
+			k = int(tmp*(flash - minVal));
+			int hold = arr[t = --L[k]];
+			arr[t] = flash;
+			flash = hold;
+			++nmove;
+		}
+	}
 
     delete[] L;
-    insertionSort(arr,n,running_time, count_compare);
-    for(int i = 0;i < n;i++){
-        cout <<arr[i] << endl;
-    }
+    insertionSort(arr,n,running_time,count_compare);
 }
 //-------------------------->Flash Sort
 

@@ -623,13 +623,12 @@ void DevTestMode() {
         while(true){
             cout << "\n-----------------CONSOLE MODE---------------\n";
             cout << "Enter 'q' to quit program.\n";
-            cout << "Enter commnad \n";
+            cout << "Enter command: \n";
             string line,temp[6]; 
             int argc = 0;
             char** argv = new char* [6];
             cin.ignore();
             getline(cin, line);
-            cout << line << endl;
             if(line == "q" || line == "")
                 break;
             stringstream ss(line);
