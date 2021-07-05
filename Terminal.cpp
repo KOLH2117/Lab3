@@ -601,7 +601,7 @@ void DevTestMode() {
         unsigned int DATA_SIZE[6] = { 10000 ,30000,50000,100000, 300000, 500000 };
         cout << "Algorithms: " <<ALGORITHM_NAME[algorithm] << endl;
         for (int i = 0; i < 6; i++) {
-            for (int j = 3; j < 4; j++) {
+            for (int j = 1; j < 4; j++) {
                 int inputSize = DATA_SIZE[i];
                 int* arr = new int[inputSize];
                 double running_time = 0;
