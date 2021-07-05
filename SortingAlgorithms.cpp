@@ -165,57 +165,28 @@ void heapSort(int arr[], int n, double& running_time, unsigned int& count_compar
 //-------------------------->Merge Sort
 
 //-------------------------->Quick Sort
-int partition(int arr[], int low, int high,unsigned int& count_compare)
+int partition(int arr[], int low, int high, unsigned int& count_compare)
 {
-    int pivot = arr[high];
-    int left = low;
-    int right = high - 1;
-    while (true)
-    {
-        while ((++count_compare && left <= right) && (++count_compare && arr[left] < pivot))
-        {
-            left++;
-        }
-
-        while ((++count_compare && right >= left) && (++count_compare && arr[right] > pivot))
-        {
-            right--;
-        }
-
-        ++count_compare;
-        if (left >= right)
-            break;
-
-        swap(arr[left], arr[right]);
-        left++;
-        right--;
-    }
-    swap(arr[left], arr[high]);
-    return left;
+    int pivot = arr[(low + high) / 2];
+	int i = low;
+	int j = high;
+	int tmp;
+	while (++count_compare &&i <= j)
+	{
+		while (++count_compare && arr[i] < pivot)
+			i++;
+		while (++count_compare && arr[j] > pivot)
+			j--;
+		if (++count_compare && i <= j) {
+			tmp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = tmp;
+			i++;
+			j--;
+		}
+	}
+	return i;
 }
-
-// int partition(int arr[], int low, int high, unsigned int& count_compare)
-// {
-//     int pivot = arr[(low + high) / 2];
-// 	int i = low;
-// 	int j = high;
-// 	int tmp;
-// 	while (++count_compare &&i <= j)
-// 	{
-// 		while (++count_compare && arr[i] < pivot)
-// 			i++;
-// 		while (++count_compare && arr[j] > pivot)
-// 			j--;
-// 		if (++count_compare && i <= j) {
-// 			tmp = arr[i];
-// 			arr[i] = arr[j];
-// 			arr[j] = tmp;
-// 			i++;
-// 			j--;
-// 		}
-// 	}
-// 	return i;
-// }
 
 void Sort(int arr[], int low, int high, unsigned int& count_compare)
 {
@@ -228,16 +199,22 @@ void Sort(int arr[], int low, int high, unsigned int& count_compare)
     }
 }
 
-void quickSort(int arr[], int n, double& running_time,unsigned int& count_compare)
+void quickSort(int arr[], int n, double& time_use, unsigned int & count_compare)
 {
+    count_compare = 0;
+    time_use = 0;
+
     clock_t start, end;
+
     start = clock();
 
     Sort(arr, 0, n - 1, count_compare);
 
     end = clock();
-    running_time = (double)(end - start) / CLOCKS_PER_SEC;
+
+    time_use = (double)(end - start) / CLOCKS_PER_SEC;
 }
+
 //-------------------------->Quick Sort
 
 //-------------------------->Counting Sort
