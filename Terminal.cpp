@@ -278,13 +278,13 @@ void OutputConsoleForAlgorithmsMODE(int cmd,char* argv[],int output_param,double
     cout << "----------------------------------------------------------------" << endl;
     switch (output_param) {
         case 0:
-            cout << "Running time: " << running_time << endl;
+            cout << "Running time: " << running_time << "s" << endl;
             break;
         case 1:
             cout << "Comparisions: " << count_compare << endl;
             break;
         case 2:
-            cout << "Running time: " << running_time << endl;
+            cout << "Running time: " << running_time << "s" << endl;
             cout << "Comparisions: " << count_compare << endl;
             break;
     }
@@ -305,7 +305,7 @@ void OutputConsoleForComparisonsMODE(int cmd,char* argv[],double running_time1,d
     }
 
     cout << "----------------------------------------------------------------" << endl;
-    cout << "Running time: "<< running_time1 << " | " << running_time2 << endl;
+    cout << "Running time: "<< running_time1 << "s | " << running_time2 <<"s"<< endl;
     cout << "Comparisions: "<< count_compare1<< " | " << count_compare2<< endl;
 
 }
@@ -601,7 +601,7 @@ void DevTestMode() {
         unsigned int DATA_SIZE[6] = { 10000 ,30000,50000,100000, 300000, 500000 };
         cout << "Algorithms: " <<ALGORITHM_NAME[algorithm] << endl;
         for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 3; j < 4; j++) {
                 int inputSize = DATA_SIZE[i];
                 int* arr = new int[inputSize];
                 double running_time = 0;
@@ -611,7 +611,7 @@ void DevTestMode() {
                 cout <<"Input size: " <<inputSize << endl;
                 cout <<"Input order: "<< DATA_ORDER[j] << endl;
                 cout << "---------------------------------------------" <<endl;
-                cout << "Running time: " << running_time << endl;
+                cout << "Running time: " << running_time  << "s"<< endl;
                 cout << "Comparisions: " << count_compare << "\n\n";
                 delete[]arr;
             }

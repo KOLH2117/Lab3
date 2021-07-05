@@ -131,7 +131,6 @@ void sift(int arr[], int left, int right, double& running_time, unsigned int& co
 
 void createHeap(int arr[], int n, double& running_time, unsigned int& count_compare) {
     //Make the array into a heap
-
     int left = (n - 1) / 2;
     while ((++count_compare) && left > -1) {
         sift(arr, left, n - 1, running_time, count_compare);
@@ -236,47 +235,49 @@ void quickSort(int arr[], int n, double& running_time,unsigned int& count_compar
     Sort(arr, 0, n - 1, count_compare);
 
     end = clock();
-
     running_time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 //-------------------------->Quick Sort
 
 //-------------------------->Counting Sort
-void countingSort(int a[], int n, double& time_use,unsigned int& count_compare)
+void countingSort(int arr[], int n, double& time_use,unsigned int& count_compare)
 {
     clock_t start, end;
     start = clock();
-    int a_fake[100];
-    int max = a[0];
-    int min = a[0];
+
+    int *a_fake = new int [n];
+    int max = arr[0];
+    int min = arr[0];
     int i;
     for (i = 1; ++count_compare && i < n; i++)
     {
-        if (++count_compare && a[i] > max)
-            max = a[i];
-        else if (++count_compare && a[i] < min)
-            min = a[i];
+        if (++count_compare && arr[i] > max)
+            max = arr[i];
+        else if (++count_compare && arr[i] < min)
+            min = arr[i];
     }
 
-    int count_array[10];
-    for (i = 0; i < 10; i++)
+    int* count_array = new int[max - min + 1];
+    for (i = 0;++count_compare && i < (max - min + 1); i++)
         count_array[i] = 0;
 
-    for (i = 0; i < n; i++)
-        count_array[a[i] - min]++;
+    for (i = 0;++count_compare && i < n; i++)
+        count_array[arr[i] - min]++;
 
-    for (i = 1; ++count_compare && i < 10; i++)
+    for (i = 1; ++count_compare && i < (max - min + 1); i++)
         count_array[i] += count_array[i - 1];
 
     for (i = 0;++count_compare && i < n; i++)
     {
-        a_fake[count_array[a[i] - min] - 1] = a[i];
-        count_array[a[i] - min]--;
+        a_fake[count_array[arr[i] - min] - 1] = arr[i];
+        count_array[arr[i] - min]--;
     }
 
-    for (i = 0; ++count_compare && i < n; i++)
-        a[i] = a_fake[i];
+    for (i = 0;++count_compare && i < n; i++)
+        arr[i] = a_fake[i];
 
+    delete[] a_fake;
+    delete[] count_array;
     end = clock();
     time_use = (double)(end - start) / CLOCKS_PER_SEC;
 }
@@ -321,7 +322,7 @@ void radixSort(int a[], int n, double& running_time,unsigned int& count_compare)
         }
         // Copy the output array to a[], so that a[] now
         // contains sorted numbers according to current digit
-        for (k = 0; k < n; k++)
+        for (k = 0;++count_compare && k < n; k++)
             a[k] = Aftersorted[k];
     }
     end = clock();
@@ -331,6 +332,9 @@ void radixSort(int a[], int n, double& running_time,unsigned int& count_compare)
 
 //-------------------------->Flash Sort
 void flashSort(int arr[],int n,double& running_time, unsigned int& count_compare){
+    clock_t start, end;
+    start = clock();
+
     int m = int(0.45*n);
 
     //------->Find min value and max index
@@ -416,6 +420,9 @@ void flashSort(int arr[],int n,double& running_time, unsigned int& count_compare
 
     delete[] L;
     insertionSort(arr,n,running_time,count_compare);
+
+    end = clock();
+    running_time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 //-------------------------->Flash Sort
 
