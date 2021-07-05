@@ -482,14 +482,8 @@ bool Command_5(int argc, char* argv[], int algorithm1, int algorithm2)
     AlgorithmsMODE(arr, size, running_time1, count_compare1, algorithm1);
     AlgorithmsMODE(brr, size, running_time2, count_compare2, algorithm2);
 
-    cout << "ALGORITHM MODE" << endl;
-    cout << "Algorithm: " << ALGORITHM_NAME[algorithm1] << " | " << ALGORITHM_NAME[algorithm2] << endl;
-    cout << "Input size: " << size << endl;
-    cout << "Input order: " << data_order << endl;
-    cout << "----------------------------------------------------------------" << endl;
-    cout << "Running time: " << running_time1 << " | " << running_time2 << endl;
-    cout << "Comparisons: " << count_compare1 << " | " << count_compare2 << endl;
-
+    OutputConsoleForComparisonsMODE(5,argv,running_time1,running_time2, count_compare1, count_compare2);
+    
     delete[]arr;
     delete[]brr;
     return true;
