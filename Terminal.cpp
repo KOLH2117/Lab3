@@ -457,6 +457,44 @@ bool Command_4(int argc, char* argv[], int algorithm1, int algorithm2){
     return true;
 }
 
+bool Command_5(int argc, char* argv[], int algorithm1, int algorithm2)
+{
+    
+    int size = stoi((string) argv[4]);
+    int* arr = new int[size];
+    int* brr = new int[size];
+    
+    int data_order = 0;
+    if(isValidDataOrder(argv[5],data_order) == false)
+        return false;
+
+    double running_time1 = 0, running_time2 = 0;
+    unsigned int count_compare1 = 0, count_compare2 = 0;
+
+    GenerateData(arr, size, data_order);
+    for(int i = 0; i < size; i++){
+        brr[i] = arr[i];
+    }
+
+    if(writeFile("input.txt",arr,size) == false){
+        return false;
+    }
+    AlgorithmsMODE(arr, size, running_time1, count_compare1, algorithm1);
+    AlgorithmsMODE(brr, size, running_time2, count_compare2, algorithm2);
+
+    cout << "ALGORITHM MODE" << endl;
+    cout << "Algorithm: " << ALGORITHM_NAME[algorithm1] << " | " << ALGORITHM_NAME[algorithm2] << endl;
+    cout << "Input size: " << size << endl;
+    cout << "Input order: " << data_order << endl;
+    cout << "----------------------------------------------------------------" << endl;
+    cout << "Running time: " << running_time1 << " | " << running_time2 << endl;
+    cout << "Comparisons: " << count_compare1 << " | " << count_compare2 << endl;
+
+    delete[]arr;
+    delete[]brr;
+    return true;
+}
+
 //---------------ALGORITHM MODE
 bool handleAlgorithmsMode(int argc, char* argv[]) {
     int algorithm = 0;
@@ -528,18 +566,10 @@ bool handleComparisonMode(int argc, char* argv[]) {
                     }
                     else {
                         if (argc == 6) {
-                        /*
-                        
-                        COMMAND 5 IS HERE
-                        Vi du
-                        if(Command_5(argc, argv, algorithm1, algorithm2) == false) {
-                            return false;
-                        }
-
-                        */
-                            
-                        }
-                        
+                            if(Command_5(argc, argv, algorithm1, algorithm2) == false) {
+                                return false;
+                            }                           
+                        } 
                     }
                 }
             }
