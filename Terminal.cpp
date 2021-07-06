@@ -218,7 +218,7 @@ void AlgorithmsMODE(int* arr, int inputSIZE, double& running_time,unsigned int& 
             break;
         case 3:
             //Shaker Sort
-
+            shakerSort(arr, inputSIZE, running_time, count_compare);
             break;
         case 4:
             //Shell Sort
@@ -230,6 +230,7 @@ void AlgorithmsMODE(int* arr, int inputSIZE, double& running_time,unsigned int& 
             break;
         case 6:
             //Merge Sort
+            mergeSortWithTimeCounter(arr, inputSIZE, running_time, count_compare);
             break;
         case 7:
             //QuickSort

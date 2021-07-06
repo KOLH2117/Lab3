@@ -46,7 +46,7 @@ void insertionSort(int arr[], int n, double& running_time, unsigned int& count_c
 }
 //-------------------------->Insertion Sort
 
-//-------------------------->Slection Sort
+//-------------------------->Selection Sort
 void selectionSort(int arr[], int n, double& running_time, unsigned int& count_compare) {
     clock_t start, end;
     start = clock();
@@ -62,7 +62,7 @@ void selectionSort(int arr[], int n, double& running_time, unsigned int& count_c
     end = clock();
     running_time = (double)(end - start) / CLOCKS_PER_SEC;
 }
-//-------------------------->Slection Sort
+//-------------------------->Selection Sort
 
 //-------------------------->Bubble Sort
 void bubbleSort(int arr[], int n, double& running_time, unsigned int& count_compare) {
@@ -82,7 +82,36 @@ void bubbleSort(int arr[], int n, double& running_time, unsigned int& count_comp
 //-------------------------->Bubble Sort
 
 //-------------------------->Shaker Sort
-
+void shakerSort(int arr[], int n, double& running_time, unsigned int& count_compare) {
+    clock_t start, end;
+    start = clock();
+    int left = 0;
+    int right = n - 1;
+    int k = 0;
+    while (++count_compare && left < right)
+    {
+        for (int i = left; ++count_compare && i < right; i++)
+        {
+            if (++count_compare && arr[i] > arr[i + 1])
+            {
+                swap(arr[i], arr[i + 1]);
+                k = i;
+            }
+        }
+        right = k;
+        for (int i = right; ++count_compare && i > left; i--)
+        {
+            if (++count_compare && arr[i] < arr[i - 1])
+            {
+                swap(arr[i], arr[i - 1]);
+                k = i;
+            }
+        }
+        left = k;
+    }
+    end = clock();
+    running_time = (double)(end - start) / CLOCKS_PER_SEC;
+}
 //-------------------------->Shaker Sort
 
 //-------------------------->Shell Sort
@@ -161,7 +190,76 @@ void heapSort(int arr[], int n, double& running_time, unsigned int& count_compar
 }
 //-------------------------->Heap Sort
 //-------------------------->Merge Sort
+void merge(int arr[], int left,int mid ,int right, unsigned int& count_compare) {
+    int* temp;
+    int i = left;
+    int j = mid + 1;
 
+    temp = new int[right - left + 1];
+
+    for (int k = 0; ++count_compare && k <= right - left; k++)
+    {
+
+        if (++count_compare && arr[i] < arr[j])
+        {
+            temp[k] = arr[i];
+            i++;
+        }
+        else
+        {
+            temp[k] = arr[j];
+            j++;
+        }
+
+
+        if (++count_compare && i == mid + 1)
+        {
+            while (++count_compare && j <= right)
+            {
+                k++;
+                temp[k] = arr[j];
+                j++;
+            }
+            break;
+        }
+        if (++count_compare && j == right + 1)
+        {
+
+            while (++count_compare && i <= mid)
+            {
+                k++;
+                temp[k] = arr[i];
+                i++;
+            }
+            break;
+        }
+    }
+
+    for (int k = 0; ++count_compare && k <= right - left; k++)
+        arr[left + k] = temp[k];
+    delete[]temp;
+}
+
+void mergeSort(int arr[], int left, int right, unsigned int& count_compare) {
+    
+    int mid;
+    if (++count_compare && left < right) {
+        mid = (left + right)/2;
+        mergeSort(arr, left, mid, count_compare); //Sort 1/2 day ben trai
+        mergeSort(arr, mid + 1, right, count_compare); //Sort 1/2 day ben phai
+        merge(arr, left, mid, right,count_compare);  //Tron 2 day lai voi nhau
+    }
+}
+
+void mergeSortWithTimeCounter(int arr[],int n,double & running_time, unsigned int& count_compare){
+    clock_t start,end;
+    start = clock();
+    
+    mergeSort(arr, 0, n-1,count_compare);
+
+    end = clock();
+    running_time = (double)(end - start) / CLOCKS_PER_SEC;
+}
 //-------------------------->Merge Sort
 
 //-------------------------->Quick Sort
@@ -201,11 +299,7 @@ void Sort(int arr[], int low, int high, unsigned int& count_compare)
 
 void quickSort(int arr[], int n, double& time_use, unsigned int & count_compare)
 {
-    count_compare = 0;
-    time_use = 0;
-
     clock_t start, end;
-
     start = clock();
 
     Sort(arr, 0, n - 1, count_compare);
