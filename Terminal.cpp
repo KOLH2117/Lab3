@@ -7,13 +7,13 @@
 
 using namespace std;
 
-int MAX_SIZE = 1000000;
-int N_ALGORITHM = 11;
-int N_OUTPUT_PARAM = 3;
-int N_DATA_ORDER = 4;
-string ALGORITHM_NAME[11] = { "selection-sort", "insertion-sort", "bubble-sort","shaker-sort", "shell-sort", "heap-sort", "merge-sort", "quick-sort","counting-sort","radix-sort","flash-sort" };
-string OUTPUT_PARAM[3] = { "-time","-comp","-both" };
-string DATA_ORDER[4] = { "-rand","-nsorted","-sorted","-rev"};
+const int MAX_SIZE = 1000000;
+const int N_ALGORITHM = 11;
+const int N_OUTPUT_PARAM = 3;
+const int N_DATA_ORDER = 4;
+const string ALGORITHM_NAME[11] = { "selection-sort", "insertion-sort", "bubble-sort","shaker-sort", "shell-sort", "heap-sort", "merge-sort", "quick-sort","counting-sort","radix-sort","flash-sort" };
+const string OUTPUT_PARAM[3] = { "-time","-comp","-both" };
+const string DATA_ORDER[4] = { "-rand","-nsorted","-sorted","-rev"};
 
 
 
@@ -626,7 +626,7 @@ void DevTestMode() {
         unsigned int DATA_SIZE[6] = { 10000 ,30000,50000,100000, 300000, 500000 };
         cout << "Algorithms: " <<ALGORITHM_NAME[algorithm] << endl;
         for (int i = 0; i < 6; i++) {
-            for (int j = 1; j < 4; j++) {
+            for (int j = 0; j < 4; j++) {
                 int inputSize = DATA_SIZE[i];
                 int* arr = new int[inputSize];
                 double running_time = 0;
